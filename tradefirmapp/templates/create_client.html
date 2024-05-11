@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+
+{% block panel_path %}Create Client{% endblock %}
+
+{% block content %}
+
+    <h5>Create Client</h5>
+    
+    <form class="p-2 border border-2" style="max-width: 500px;">
+        {% csrf_token %}
+        <div class="row p-2">
+            <div class="col">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="orderid" name="clientnum" required disabled>
+                    <label for="clientnum">Client Number</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-floating">
+                    <input type="date" class="form-control" id="createdate">
+                    <label for="createdate">Create Date</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-floating m-2">
+            <input type="input" class="form-control" id="clientname">
+            <label for="clientname">Client Name</label>
+        </div>
+        <div class="form-floating m-2">
+            <input type="input" class="form-control" id="clientgstn">
+            <label for="clientgstn">Client GST Number</label>
+        </div>
+        <div class="row pe-2 ps-2">
+            <div class="col-5">
+                <div class="form-floating">
+                    <input type="input" class="form-control" id="clientphone">
+                    <label for="clientphone">Phone Number</label>
+                </div>
+            </div>
+            <div class="col-7">
+                <div class="form-floating">
+                    <input type="input" class="form-control" id="clientemail">
+                    <label for="clientemail">Email</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-floating m-2">
+            <textarea rows="4" class="form-control" id="clientaddr"></textarea>
+            <label for="clientaddr">Address</label>
+        </div>
+        <div class="form-floating m-2">
+            <input type="input" class="form-control" id="remark">
+            <label for="remark">Remark</label>
+        </div>
+        <div class="gap-2 d-flex mt-2">
+            <button type="submit" class="btn btn-success" style="flex-grow: 1;">Create</button>
+            <button type="button" class="btn btn-secondary" id="clear-form" style="flex-grow: 1;" onclick="window.location.reload();">Clear</button>
+        </div>
+    </form>
+
+{% endblock %}

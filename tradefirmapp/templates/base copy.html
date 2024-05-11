@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Trade Firm App{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('add-row').addEventListener('click', function() {
+            var clone = document.querySelector('#item-name').cloneNode(true);
+            clone.name = 'item_name[]';
+            document.getElementById('create-order-form').appendChild(clone);
+        });
+    
+        document.getElementById('clear-form').addEventListener('click', function() {
+            document.getElementById('create-order-form').reset();
+        });
+    });
+    </script>
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">Fixed top</a>
+            <form class="d-flex">
+            <button class="btn btn-outline-success me-2" type="button">Main button</button>
+            <button class="btn btn-outline-secondary" type="button">Smaller button</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-3 p-0">
+            <!-- Add sidebar options for each form -->
+            <button class="container-fluid">Form 1</button>
+            <a href="">Form 2</a>
+            <a href="">Form 3</a>
+            <a href="">Form 4</a>
+            <a href="">Form 5</a>
+            <a href="">Form 6</a>
+            <a href="">Form 7</a>
+          </div>
+          
+          <div class="col-9 bg-dark">
+            <!-- Main Panel -->
+            <main class="main-panel p-4">
+                <!-- Panel Header -->
+                <div class="panel-header mb-4">
+                    <h2 class="text-center">{% block panel_title %}{% endblock %}</h2>
+                </div>
+                <!-- Form or Content Area -->
+                <div class="panel-content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </main>
+          </div>
+        </div>
+    </div>
+
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<!-- Add your custom JavaScript files and other scripts here -->
+
+</body>
+</html>

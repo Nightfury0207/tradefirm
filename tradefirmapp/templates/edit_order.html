@@ -1,0 +1,91 @@
+{% block content %}
+    <form class="p-2 border border-2" style="max-width: 500px;" method="post" action="{% url 'createorder' %}">
+        {% csrf_token %}
+        <div class="row p-2">
+            <div class="col">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="orderid" name="orderid" required disabled>
+                    <label for="orderid">Order Id</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-floating">
+                    <input type="date" class="form-control" id="orderdate" name="orderdate" required>
+                    <label for="orderdate">Order Date</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-floating m-2">
+            <select class="form-select" id="clientname" name="clientname" aria-label="clientname" required>
+              <option selected value="Test">Select</option>
+                {% for item in clients %}
+                    <option value="{{ item.id }}">{{ clients.name }}</option>
+                {% endfor %}
+            </select>
+            <label for="clientname">Client Name</label>
+        </div>
+
+        <div class="form-floating m-2">
+            <select class="form-select" id="orderedvia" name="orderedvia" aria-label="orderedvia" required>
+              <option selected value="Test">Select</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <label for="orderedvia">Ordered via</label>
+        </div>
+        <div class="form-floating m-2">
+            <input type="input" class="form-control" id="remark">
+            <label for="remark">Remark</label>
+        </div>
+
+        <div id="itemlist" style="height: 200px;overflow-y: auto;" class="p-2 m-2 border border-1">
+            <p class="m-0">Items</p>
+            <div class="row g-2 text-center" id="" name="">
+                <div class="col">
+                <div class="">
+                    <label for="">Item Name</label>
+                </div>
+                </div>
+                <div class="col">
+                    <div class="">
+                    <label for="">Quantity</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-2 p-1" id="additem" name="additem[]">
+                <div class="col">
+                <div class="">
+                    <select class="form-select form-select-sm" id="itemname" name="itemname" aria-label="itemname" required>
+                    <option selected value="Test">Select</option>
+                        {% for item in items %}
+                            <option value="{{ item.id }}">{{ item.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                </div>
+                <div class="col">
+                    <div class="">
+                    <input type="number" class="form-control form-select-sm" id="itemqty" name="itemqty" value="1" required min="1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button type="button" class="form-control btn btn-primary" id="add-row" onclick="additemrow();">Add Row</button>
+        <div class="gap-2 d-flex mt-2">
+            <button type="submit" class="btn btn-success" style="flex-grow: 1;">Create</button>
+            <button type="button" class="btn btn-secondary" id="clear-form" style="flex-grow: 1;" onclick="window.location.reload();">Clear</button>
+        </div>
+    </form>
+
+    <script>
+        function additemrow() {
+            var clone = document.querySelector('#additem').cloneNode(true);
+            clone.name = 'additem[]';
+            document.getElementById('itemlist').appendChild(clone);
+        }
+    </script>
+
+{% endblock %}

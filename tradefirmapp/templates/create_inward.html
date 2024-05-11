@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+
+{% block panel_path %}Create Inward{% endblock %}
+
+{% block content %}
+
+    <h5>Create Inward</h5>
+    <form class="p-2 border border-2" style="max-width: 500px;" method="post" action="{% url 'createinward' %}">
+        {% csrf_token %}
+        <div class="row p-2">
+            <div class="col">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="Inwardid" name="Inwardnum" required disabled>
+                    <label for="Inwardnum">Inward Number</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-floating">
+                    <input type="date" class="form-control" id="Inwarddate" name="Inwarddate" required>
+                    <label for="Inwarddate">Inward Date</label>
+                </div>
+            </div>
+        </div>
+
+        <div id="itemlist" style="height: 200px;overflow-y: auto;" class="p-2 m-2 border border-1">
+            <p class="m-0">Items</p>
+            <div class="row g-2 text-center" id="" name="">
+                <div class="col">
+                <div class="">
+                    <label for="">Item Name</label>
+                </div>
+                </div>
+                <div class="col">
+                    <div class="">
+                    <label for="">Quantity</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-2 p-1" id="additem" name="additem[]">
+                <div class="col">
+                <div class="">
+                    <select class="form-select form-select-sm" id="itemname" name="itemname" aria-label="itemname" required>
+                    <option selected value="Test">Select</option>
+                        {% for item in items %}
+                            <option value="{{ item.id }}">{{ item.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                </div>
+                <div class="col">
+                    <div class="">
+                    <input type="number" class="form-control form-select-sm" id="itemqty" name="itemqty" value="1" required min="1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="form-control btn btn-primary" id="add-row">Add Row</button>
+        <div class="gap-2 d-flex mt-2">
+            <button type="submit" class="btn btn-success" style="flex-grow: 1;">Create</button>
+            <button type="button" class="btn btn-secondary" id="clear-form" style="flex-grow: 1;" onclick="window.location.reload();">Clear</button>
+        </div>
+    </form>
+
+{% endblock %}

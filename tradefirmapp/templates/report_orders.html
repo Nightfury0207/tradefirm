@@ -1,0 +1,91 @@
+{% extends 'index.html' %}
+
+{% block panel_path %}Orders Report{% endblock %}
+
+{% block content %}
+
+    <h5>Orders Report</h5>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-bordered table-clickable table-sm">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-href="{% url 'home' %}">
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr data-href="{% url 'home' %}">
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr data-href="{% url 'home' %}">
+              <th scope="row">3</th>
+              <td>Larry the Bird</td>
+              <td>Thornton</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <!-- Modal for displaying details -->
+    <div class="modal fade" id="orderDetailsModal" tabindex="-1" role="dialog" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="orderDetailsModalLabel">Order Details</h5>
+              </div>
+              <div class="modal-body">
+                  <div id="orderDetailsContent">
+                    
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <script>
+        $(document).ready(function() {
+            // Attach click event handler to table rows
+            $('tbody tr').click(function() {
+                var orderId = $(this).data('order-id');
+                fetchOrderDetails(orderId);
+            });
+
+             // Add event listener to close button
+             $('#orderDetailsModal .close').click(function() {
+                $('#orderDetailsModal').modal('hide');
+            });
+        });
+
+        function fetchOrderDetails(orderId) {
+            // AJAX request to fetch order details
+            $.ajax({
+                url: '/test', // Replace with your Django view URL
+                type: 'GET',
+                data: {'order_id': orderId},
+                success: function(response) {
+                    $('#orderDetailsContent').html(response);
+
+                    // Show modal
+                    $('#orderDetailsModal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error(error);
+                }
+            });
+        }
+    </script>
+
+{% endblock %}

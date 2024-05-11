@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block panel_path %}Create Item{% endblock %}
+
+{% block content %}
+
+    <h5>Create Item</h5>
+    <form class="p-2 border border-2" style="max-width: 500px;">
+        {% csrf_token %}
+        <div class="row p-2">
+            <div class="col">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="itemid" name="itemnum" required disabled>
+                    <label for="itemnum">Item Number</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-floating">
+                    <input type="date" class="form-control" id="createdate">
+                    <label for="createdate">Create Date</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-floating m-2">
+            <input type="input" class="form-control" id="itemname">
+            <label for="itemname">Item Name</label>
+        </div>
+        <div class="form-floating m-2">
+            <input type="input" class="form-control" id="itemhsn">
+            <label for="itemhsn">Item HSN Number</label>
+        </div>
+        <div class="form-floating m-2">
+            <input type="number" class="form-control" id="balance" value=1 required min=1>
+            <label for="balance">Opening Balance</label>
+        </div>
+        <div class="gap-2 d-flex mt-2">
+            <button type="submit" class="btn btn-success" style="flex-grow: 1;">Create</button>
+            <button type="button" class="btn btn-secondary" id="clear-form" style="flex-grow: 1;" onclick="window.location.reload();">Clear</button>
+        </div>
+    </form>
+
+{% endblock %}

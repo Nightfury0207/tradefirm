@@ -1,0 +1,50 @@
+/* Custom CSS Styles */
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh; /* Ensure body takes up full height of viewport */
+    margin: 0; /* Remove default margin */
+}
+
+.container-fluid {
+    height: 100%; /* Ensure container takes up full height of body */
+    display: flex; /* Use Flexbox layout */
+}
+
+.sidebar {
+    flex: 0 0 250px; /* Sidebar takes up fixed width of 250px */
+}
+
+.main-panel {
+    flex: 1; /* Main panel takes up remaining space */
+ /* Enable vertical scroll if content overflows */
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.sidebar-nav {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.sidebar-nav a {
+    display: block;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+}
+
+.sidebar-nav a:hover {
+    background-color: #f0f0f0;
+}
+
+.panel-header {
+    border-bottom: 1px solid #ccc;
+}
+
+.panel-content {
+    min-height: 200px; /* Adjust as needed */
+}

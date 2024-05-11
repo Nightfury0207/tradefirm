@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Order{% endblock %}
+
+{% block panel_title %}Create Order{% endblock %}
+
+{% block content %}
+<form method="post" id="create-order-form" class="border rounded-4 border-2 border-dark p-4">
+    {% csrf_token %}
+    <div class="form-group row mb-3">
+        <label for="order-date" class="col-sm-2 col-form-label">Date of Order:</label>
+        <div class="col-sm-10">
+            <input type="date" class="form-control form-control-sm" id="order-date" name="order_date" value="{{ today|date:'Y-m-d' }}">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="client-name" class="col-sm-2 col-form-label">Client Name:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" id="client-name" name="client_name">
+        </div>
+    </div>
+    <div class="form-group row mb-3">
+        <label for="ordered-via" class="col-sm-2 col-form-label">Ordered Via:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control form-control-sm" id="ordered-via" name="ordered_via">
+        </div>
+    </div>
+
+    <div class="form-group row mb-3 text-center border">
+        <div class="row">
+            <div class="col p-2">
+                <label for="item-name" class="form-label-sm">Item Name</label>
+            </div>
+            <div class="col p-2">
+                <label for="quantity" class="form-label-sm">Quantity</label>
+            </div>
+        </div>
+        <div id="itemlist" style="overflow-y: auto;max-height: 150px;">
+            <div class="row p-2" id="additem" name="additem[]">
+                <div class="col">
+                    <select class="form-control form-control-sm" id="item-name" name="item_name[]">
+                        {% for item in items %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <input type="number" class="form-control form-control-sm" id="quantity" name="quantity[]" value="1" min="1">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button type="button" class="form-control btn btn-primary m-2" id="add-row">Add Row</button>
+        </div>
+    </div>
+    <div class="d-grid gap-2 d-flex">
+        <button type="submit" class="btn btn-success" style="flex-grow: 1;">Create</button>
+        <button type="button" class="btn btn-secondary" id="clear-form" style="flex-grow: 1;">Clear</button>
+    </div>
+</form>
+{% endblock %}
